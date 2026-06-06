@@ -8,11 +8,9 @@ import { getUserMe } from "../services/api";
 function Dashboard() {
   const navigate = useNavigate();
 
-  const [profileData, setProfileData] =
-    useState<any>(null);
+  const [profileData, setProfileData] = useState<any>(null);
 
-  const [errorMessage, setErrorMessage] =
-    useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const logout = async () => {
     await signOut(auth);
@@ -31,9 +29,7 @@ function Dashboard() {
     } catch (error) {
       console.error(error);
 
-      setErrorMessage(
-        "Não foi possível carregar os dados do usuário."
-      );
+      setErrorMessage("Não foi possível carregar os dados do usuário.");
     }
   };
 
@@ -42,52 +38,39 @@ function Dashboard() {
       <h1>Usuário Logado</h1>
 
       <p>
-        <strong>Email:</strong>{" "}
-        {auth.currentUser?.email}
+        <strong>Email:</strong> {auth.currentUser?.email}
       </p>
 
-      <button onClick={carregarPerfil}>
-        Carregar Perfil via NestJS
-      </button>
+      <button onClick={carregarPerfil}>Carregar Perfil via NestJS</button>
 
       <br />
       <br />
 
-      {errorMessage && (
-        <p style={{ color: "red" }}>
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
       {profileData && (
         <div>
           <h2>Perfil vindo do Firestore</h2>
 
           <p>
-            <strong>Nome:</strong>{" "}
-            {profileData.name}
+            <strong>Nome:</strong> {profileData.name}
           </p>
 
           <p>
-            <strong>Email:</strong>{" "}
-            {profileData.email}
+            <strong>Email:</strong> {profileData.email}
           </p>
 
           <p>
-            <strong>UID:</strong>{" "}
-            {profileData.uid}
+            <strong>UID:</strong> {profileData.uid}
           </p>
 
           <p>
-            <strong>Criado em:</strong>{" "}
-            {profileData.createdAt}
+            <strong>Criado em:</strong> {profileData.createdAt}
           </p>
         </div>
       )}
 
-      <button onClick={logout}>
-        Sair
-      </button>
+      <button onClick={logout}>Sair</button>
     </div>
   );
 }

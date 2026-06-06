@@ -11,8 +11,7 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] =
-    useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,37 +41,28 @@ function Register() {
           "- 1 letra maiúscula\n" +
           "- 1 letra minúscula\n" +
           "- 1 número\n" +
-          "- 1 caractere especial"
+          "- 1 caractere especial",
       );
       return;
     }
 
     try {
-      const userCredential =
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-      await setDoc(
-        doc(
-          db,
-          "users",
-          userCredential.user.uid
-        ),
-        {
-          uid: userCredential.user.uid,
-          name: name,
-          email: email,
-          createdAt: new Date().toISOString(),
-        }
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
       );
+
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        uid: userCredential.user.uid,
+        name: name,
+        email: email,
+        createdAt: new Date().toISOString(),
+      });
 
       alert("Usuário criado com sucesso!");
 
       navigate("/");
-
     } catch (error: any) {
       alert(error.message);
     }
@@ -87,51 +77,35 @@ function Register() {
           type="text"
           placeholder="Nome"
           value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
+          onChange={(e) => setName(e.target.value)}
         />
 
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Senha"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Confirmar senha"
           value={confirmPassword}
-          onChange={(e) =>
-            setConfirmPassword(
-              e.target.value
-            )
-          }
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
 
-        <button
-          className="btn btn-login"
-          onClick={register}
-        >
+        <button className="btn btn-login" onClick={register}>
           Cadastrar
         </button>
 
-        <p
-          className="link"
-          onClick={() => navigate("/")}
-        >
+        <p className="link" onClick={() => navigate("/")}>
           Já possui conta? Entrar
         </p>
       </div>

@@ -20,11 +20,7 @@ function Login() {
 
   const login = async () => {
     try {
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/dashboard");
     } catch (error: any) {
@@ -36,10 +32,7 @@ function Login() {
     try {
       const provider = new GoogleAuthProvider();
 
-      await signInWithPopup(
-        auth,
-        provider
-      );
+      await signInWithPopup(auth, provider);
 
       navigate("/dashboard");
     } catch (error: any) {
@@ -54,14 +47,9 @@ function Login() {
     }
 
     try {
-      await sendPasswordResetEmail(
-        auth,
-        email
-      );
+      await sendPasswordResetEmail(auth, email);
 
-      alert(
-        "Email de recuperação enviado."
-      );
+      alert("Email de recuperação enviado.");
     } catch (error: any) {
       alert(error.message);
     }
@@ -73,59 +61,36 @@ function Login() {
         <h1>Faça seu Login</h1>
         <h1>Entrar</h1>
 
-<p className="subtitle">
-  Acesse sua conta
-</p>
-        
+        <p className="subtitle">Acesse sua conta</p>
 
         <input
           type="email"
           placeholder="Digite seu email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Digite sua senha"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button
-          className="btn btn-login"
-          onClick={login}
-        >
+        <button className="btn btn-login" onClick={login}>
           Entrar
         </button>
-        <div className="divider">
-  ou
-</div>
+        <div className="divider">ou</div>
 
-        <button
-          className="btn btn-google"
-          onClick={loginGoogle}
-        >
+        <button className="btn btn-google" onClick={loginGoogle}>
           Entrar com Google
         </button>
 
-        <p
-          className="link"
-          onClick={resetPassword}
-        >
+        <p className="link" onClick={resetPassword}>
           Esqueci minha senha
         </p>
 
-        <p
-          className="link"
-          onClick={() =>
-            navigate("/cadastro")
-          }
-        >
+        <p className="link" onClick={() => navigate("/cadastro")}>
           Não possui conta? Cadastre-se
         </p>
       </div>
